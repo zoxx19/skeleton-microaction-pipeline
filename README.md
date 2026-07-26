@@ -5,7 +5,7 @@ body movements (a head tilt, a hand-to-face touch, a shoulder shift) — first o
 **MA-52** benchmark dataset, then applied to real motion-capture recordings from an
 **EmpkinS / TSST** (Trier Social Stress Test) stress study.
 
-Developed as part of graduate research at the MaD Lab, Friedrich-Alexander-Universität
+Developed as part of student research at the MaD Lab, Friedrich-Alexander-Universität
 Erlangen-Nürnberg (FAU).
 
 > **This is a clean, code-only extraction from a larger working research tree.**
