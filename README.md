@@ -312,7 +312,6 @@ To actually run this pipeline, you need to independently obtain:
 - **Trained model weights** — not included; train your own using the steps above, or
   obtain them separately if you already have access to a prior training run.
 
----
 
 ---
 
