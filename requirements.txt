@@ -1,0 +1,45 @@
+# ==========================================================================
+# micro-action-pipeline — third-party runtime dependencies
+# Built by scanning every .py in the repo (stdlib imports excluded) and
+# cross-referencing against actual usage. Versions are intentionally
+# unpinned (no script requires a specific version).
+#   Install:  uv pip install -r requirements.txt
+# ==========================================================================
+
+# --- core numerics / DL ---
+numpy                 # used throughout (poses, arrays)
+torch                 # MMN model, feeders, training/inference
+timm                  # MMN.py (timm.layers), main_single.py (timm.scheduler.cosine_lr)
+scikit-learn          # main_single.py: sklearn.metrics.confusion_matrix
+tensorboardX          # main_single.py: SummaryWriter (train/val logging)
+
+# --- data / io ---
+PyYAML                # config loading (main_single, build_ma52_single, label_conversion)
+pandas                # label_analysis.py, inspect scripts
+tqdm                  # progress bars (feeders, empkins pipeline)
+
+# --- plotting / visualization ---
+matplotlib            # neutralization vis, empkins visualize/verify, label_analysis
+                      # (mpl_toolkits.mplot3d ships with matplotlib — no separate pkg)
+
+# ==========================================================================
+# VENDORED — NOT installed from PyPI
+# --------------------------------------------------------------------------
+# torchlight  and  torchpack  are NOT pip-installed. The PyPI names collide
+# with unrelated packages, so both are vendored in-tree, copied from the
+# original repo (~/repos/Micro-Action/Micro-action skeleton/MMN/{torchlight,
+# torchpack}/):
+#     mmn_training/torchlight/     (provides DictAction, IO, etc.)
+#     mmn_training/torchpack/      (torchlight.util imports torchpack.runner.hooks)
+# Run the trainer with mmn_training/ on PYTHONPATH so both resolve.
+#
+# The vendored torchpack declares its own deps (requests, six); they are
+# only exercised when torchlight -> torchpack.runner.hooks is imported
+# (i.e. when running main_single.py, not the model/feeder imports):
+h5py                  # transitive: vendored torchlight (torchlight/util.py imports h5py)
+requests              # transitive: vendored torchpack
+six                   # transitive: vendored torchpack
+# NOTE: torchpack/io.py lazily imports `cvbase` (old CV util) inside a function;
+#       it is NOT needed for the trainer's import path (torchlight -> DictAction)
+#       and is intentionally omitted. Add it only if you call torchpack.io helpers.
+# ==========================================================================
