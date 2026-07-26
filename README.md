@@ -23,7 +23,6 @@ Erlangen-Nürnberg (FAU).
 - [Setup](#setup)
 - [Running each stage](#running-each-stage)
 - [Data policy](#data-policy)
-- [Known limitations / open items](#known-limitations--open-items)
 - [Acknowledgments](#acknowledgments)
 
 ---
