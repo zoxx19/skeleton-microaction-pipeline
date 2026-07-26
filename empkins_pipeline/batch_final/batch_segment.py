@@ -22,7 +22,8 @@ import matplotlib.pyplot as plt
 # ============================================================
 # CONFIG
 # ============================================================
-DATA_ROOT  = Path("/home/hpc/iwso/REDACTED_ACCOUNT/repos/Micro-Action/data/empkins_pilot/data_per_subject")
+# Set <PROJECT_ROOT> to your local checkout of the Micro-Action repository.
+DATA_ROOT  = Path("<PROJECT_ROOT>/data/empkins_pilot/data_per_subject")
 OUTPUT_BASE = Path("empkins_processing/segments")
 
 SUBJECTS = [

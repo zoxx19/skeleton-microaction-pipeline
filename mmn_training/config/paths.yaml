@@ -1,24 +1,28 @@
 # ===== Project paths =====
-base_dir: /home/hpc/iwso/REDACTED_ACCOUNT/repos/Micro-Action/Micro-action skeleton/MMN
-model_path: /home/hpc/iwso/REDACTED_ACCOUNT/models/pose_landmarker_full.task
+# Placeholders — set these before running:
+#   <PROJECT_ROOT> : your local checkout of the Micro-Action repository
+#                    (the directory that contains "Micro-action skeleton/").
+#   <MODEL_PATH>   : full path to the MediaPipe "pose_landmarker_full.task" model file.
+base_dir: <PROJECT_ROOT>/Micro-action skeleton/MMN
+model_path: <MODEL_PATH>
 
-# ===== Train Data paths for MMA =====
-# video_dir: /home/woody/iwso/REDACTED_COLLABORATOR/scratch/MMA-52/train
-# out_root: /home/woody/iwso/REDACTED_COLLABORATOR/scratch/MMA-52/npy_out
+# ===== Train Data paths for MMA (separate project — example only) =====
+# video_dir: /home/woody/iwso/<OTHER_ACCOUNT>/scratch/MMA-52/train
+# out_root: /home/woody/iwso/<OTHER_ACCOUNT>/scratch/MMA-52/npy_out
 
 # ===== Train Data paths for MA =====
-video_dir: /home/hpc/iwso/REDACTED_ACCOUNT/repos/Micro-Action/Micro-action skeleton/MMN/data/MA52_real/train
-out_root: /home/hpc/iwso/REDACTED_ACCOUNT/repos/Micro-Action/Micro-action skeleton/MMN/npy_out_ma
+video_dir: <PROJECT_ROOT>/Micro-action skeleton/MMN/data/MA52_real/train
+out_root: <PROJECT_ROOT>/Micro-action skeleton/MMN/npy_out_ma
 
-# ===== Vali Data paths for MMA =====
-# video_dir: /home/woody/iwso/REDACTED_COLLABORATOR/scratch/MMA-52/val
-# out_root: /home/woody/iwso/REDACTED_COLLABORATOR/scratch/MMA-52/npy_out
+# ===== Vali Data paths for MMA (separate project — example only) =====
+# video_dir: /home/woody/iwso/<OTHER_ACCOUNT>/scratch/MMA-52/val
+# out_root: /home/woody/iwso/<OTHER_ACCOUNT>/scratch/MMA-52/npy_out
 
-# ===== Vali Data paths for MA =====
-# video_dir: /home/hpc/iwso/REDACTED_COLLABORATOR/MMN_MMA33/data/MA52_real/val
-# out_root: /home/woody/iwso/REDACTED_COLLABORATOR/MMN_MMA33/npy_out
+# ===== Vali Data paths for MA (separate project — example only) =====
+# video_dir: /home/hpc/iwso/<OTHER_ACCOUNT>/<OTHER_PROJECT>/data/MA52_real/val
+# out_root: /home/woody/iwso/<OTHER_ACCOUNT>/<OTHER_PROJECT>/npy_out
 
-log_dir: /home/hpc/iwso/REDACTED_ACCOUNT/repos/Micro-Action/Micro-action skeleton/MMN/logs
+log_dir: <PROJECT_ROOT>/Micro-action skeleton/MMN/logs
 
 # ===== Pose extraction defaults =====
 pose:
@@ -29,12 +33,10 @@ pose:
   save_dtype: float16
 
 # MA52 Root directory where extracted pose npy files are stored
-npy_root: /home/hpc/iwso/REDACTED_ACCOUNT/repos/Micro-Action/Micro-action skeleton/MMN/npy_out_ma_neutralized
+npy_root: <PROJECT_ROOT>/Micro-action skeleton/MMN/npy_out_ma_neutralized
 
 # MMA52 Root directory where extracted pose npy files are stored
-mma_npy_root: /home/hpc/iwso/REDACTED_ACCOUNT/repos/Micro-Action/Micro-action skeleton/MMN/npy_out_mma
+mma_npy_root: <PROJECT_ROOT>/Micro-action skeleton/MMN/npy_out_mma
 
 # Root directory for datasets / annotations / output pkls
-data_root: /home/hpc/iwso/REDACTED_ACCOUNT/repos/Micro-Action/Micro-action skeleton/MMN/data
-
-
+data_root: <PROJECT_ROOT>/Micro-action skeleton/MMN/data

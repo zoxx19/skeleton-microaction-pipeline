@@ -1,5 +1,9 @@
-model_path: /home/hpc/iwso/REDACTED_ACCOUNT/models/pose_landmarker_full.task
-out_root: "/home/hpc/iwso/REDACTED_ACCOUNT/repos/Micro-Action/Micro-action skeleton"
+# Placeholders — set these before running:
+#   <MODEL_PATH>   : full path to the MediaPipe "pose_landmarker_full.task" model file.
+#   <PROJECT_ROOT> : your local checkout of the Micro-Action repository
+#                    (the directory that contains "Micro-action skeleton/").
+model_path: <MODEL_PATH>
+out_root: "<PROJECT_ROOT>/Micro-action skeleton"
 
 pose:
   stride: 1

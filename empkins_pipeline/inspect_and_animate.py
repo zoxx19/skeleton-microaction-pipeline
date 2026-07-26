@@ -25,7 +25,8 @@ from mpl_toolkits.mplot3d import Axes3D  # noqa
 # ============================================================
 # CONFIG — change these to test different subjects/conditions
 # ============================================================
-DATA_ROOT    = Path("/home/hpc/iwso/REDACTED_ACCOUNT/repos/Micro-Action/data/empkins_pilot/data_per_subject")
+# Set <PROJECT_ROOT> to your local checkout of the Micro-Action repository.
+DATA_ROOT    = Path("<PROJECT_ROOT>/data/empkins_pilot/data_per_subject")
 SUBJECT      = "VP_04"
 CONDITION    = "tsst"       # "tsst" or "ftsst"
 PHASE        = "talk"       # "talk", "math", or "total"

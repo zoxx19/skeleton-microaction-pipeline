@@ -2,14 +2,15 @@ import os
 import re
 from collections import defaultdict, Counter
 
-# Change these paths if needed
+# Change these paths if needed.
+# Set <PROJECT_ROOT> to your local checkout of the Micro-Action repository.
 folders = {
-    "train": "/home/hpc/iwso/REDACTED_ACCOUNT/repos/Micro-Action/Micro-action skeleton/MMN/data/ma52_train_neutralized",
-    "val": "/home/hpc/iwso/REDACTED_ACCOUNT/repos/Micro-Action/Micro-action skeleton/MMN/data/ma52_val_neutralized",
+    "train": "<PROJECT_ROOT>/Micro-action skeleton/MMN/data/ma52_train_neutralized",
+    "val": "<PROJECT_ROOT>/Micro-action skeleton/MMN/data/ma52_val_neutralized",
     # "test": "ma52_test_neutralized",   # uncomment if you have it
 }
 
-annotation_txt = "/home/hpc/iwso/REDACTED_ACCOUNT/repos/Micro-Action/mar_scripts/manet/mmaction2/data/ma52/train_list_videos.txt"
+annotation_txt = "<PROJECT_ROOT>/mar_scripts/manet/mmaction2/data/ma52/train_list_videos.txt"
 
 def parse_pose_name(filename):
     name = os.path.basename(filename)

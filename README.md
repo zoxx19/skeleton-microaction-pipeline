@@ -108,11 +108,12 @@ the full run.
 ## Path configuration note
 
 `mmn_training/config/paths.yaml` was reconciled during extraction: several entries in the
-original pointed at a **collaborator's account and layout**
-(`/home/hpc/iwso/REDACTED_COLLABORATOR/MMN_MMA33/…`). Those were rewritten to this account's live
-`REDACTED_ACCOUNT` layout under `.../Micro-Action/Micro-action skeleton/MMN`, consistent with the
-`base_dir` / `npy_root` / `data_root` entries. Absolute cluster paths (conda roots, SLURM
-partitions, `~/repos/...` locations) remain HPC-specific — adjust for your environment.
+original pointed at **a collaborator's account and layout** on the cluster. Those were
+rewritten to this account's own layout under `.../Micro-Action/Micro-action skeleton/MMN`,
+consistent with the `base_dir` / `npy_root` / `data_root` entries. Account-specific
+absolute paths have been replaced with `<PROJECT_ROOT>` / `<MODEL_PATH>` placeholders — set
+them to your own checkout before running. Remaining cluster specifics (conda roots, SLURM
+partitions, `~/repos/...` locations) are environment-dependent — adjust for your setup.
 
 ---
 

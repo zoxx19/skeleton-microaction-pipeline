@@ -6,7 +6,8 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --output=slurm-%j.out
 
-source /home/hpc/iwso/REDACTED_ACCOUNT/miniconda3/etc/profile.d/conda.sh
+# Adjust to your conda install location (<CONDA_ROOT>); example uses $HOME/miniconda3
+source "$HOME/miniconda3/etc/profile.d/conda.sh"
 conda activate mmn_clean
 
 cd ~/repos/Micro-Action/"Micro-action skeleton"/MMN

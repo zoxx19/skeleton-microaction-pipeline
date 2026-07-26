@@ -34,7 +34,8 @@ from mpl_toolkits.mplot3d import Axes3D  # noqa
 # ============================================================
 # CONFIG
 # ============================================================
-DATA_ROOT  = Path("/home/hpc/iwso/REDACTED_ACCOUNT/repos/Micro-Action/data/empkins_pilot/data_per_subject")
+# Set <PROJECT_ROOT> to your local checkout of the Micro-Action repository.
+DATA_ROOT  = Path("<PROJECT_ROOT>/data/empkins_pilot/data_per_subject")
 SUBJECT    = "VP_04"
 
 # Global threshold percentile — computed across ALL phases of this subject
