@@ -1,0 +1,13 @@
+model_path: /home/hpc/iwso/REDACTED_ACCOUNT/models/pose_landmarker_full.task
+out_root: "/home/hpc/iwso/REDACTED_ACCOUNT/repos/Micro-Action/Micro-action skeleton"
+
+pose:
+  stride: 1
+  brightness: 0.0
+  contrast: 1.0
+  roi: [0, 0, 1, 1]
+  save_dtype: float32
+  num_poses: 1
+  min_pose_detection_confidence: 0.5
+  min_pose_presence_confidence: 0.5
+  min_tracking_confidence: 0.5

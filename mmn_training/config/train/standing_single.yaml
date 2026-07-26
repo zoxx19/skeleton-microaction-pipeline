@@ -1,0 +1,72 @@
+# ============================================================
+# Standing MA (neutralized lower body) - single-label training
+# ============================================================
+
+seed: 1
+num_worker: 4
+phase: train
+save_score: False
+
+log_interval: 100
+eval_interval: 5
+save_interval: 5
+show_topk: [1, 5]
+
+work_dir: ./work_dir/train/STANDING_SINGLE_UPPER
+
+feeder: feeders.feeder_single.Feeder
+
+train_feeder_args:
+  split: train
+  time_steps: 96
+  coord_dim: 3
+  data_type: j
+  data_root: ./data/STANDING_single_upper
+  repeat: 1
+  debug: False
+
+  aug_prob: 0.2
+  rot_max_deg: 15.0
+
+  normalize: true
+  center_joint: 23
+
+test_feeder_args:
+  split: val
+  time_steps: 96
+  coord_dim: 3
+  data_type: j
+  data_root: ./data/STANDING_single_upper
+  debug: False
+
+model: model.MMN.MMN_
+
+model_args:
+  in_channels: 3
+  num_classes: 40
+  num_people: 1
+  num_points: 33
+  kernel_size: 3
+  num_heads: 4
+  mlp_ratio: 2.0
+  drop: 0.0
+  head_drop: 0.1
+  drop_path: 0.2
+  index_t: True
+
+optimizer: AdamW
+weight_decay: 0.1
+
+lr_scheduler: cosine
+base_lr: 3e-4
+min_lr: 1e-5
+warmup_lr: 1e-7
+warm_up_epoch: 5
+
+device: [0]
+batch_size: 32
+test_batch_size: 32
+num_epoch: 70
+start_epoch: 0
+
+loss_type: LSCE

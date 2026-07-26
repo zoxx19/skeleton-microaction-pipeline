@@ -1,0 +1,72 @@
+# ==========================================================================
+# micro-action-pipeline — code/config only. NO data of any kind in this repo.
+# ==========================================================================
+
+# --- Array / tensor / model / prediction blobs ---
+*.npy
+*.npz
+*.pt
+*.pth
+*.pkl
+*.ckpt
+*.onnx
+*.raw
+
+# --- Motion-capture / EmpkinS raw data ---
+*.bvh
+*.bvh.gz
+*_global_pose.csv.gz
+*.c3d
+
+# --- Archives ---
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.gz
+
+# --- Data / output directories (never commit) ---
+data/
+work_dir/
+work_dirs/
+segments/
+normalized/
+normalized_v2/
+normalized*/
+npy_out_ma/
+npy_out_ma_neutralized/
+npy_out*/
+inference/
+checkpoints/
+runs/
+
+# --- Logs ---
+logs/
+*.log
+slurm-*.out
+*.out
+*.err
+events.out.tfevents.*
+
+# --- Large media (regenerable visual artifacts) ---
+*.mp4
+*.avi
+*.mov
+# NOTE: a few small (<500 KB) neutralization comparison PNGs ARE tracked
+#       under neutralization/neutralization_vis/ — keep those.
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+
+# --- OS / editor cruft ---
+.DS_Store
+__MACOSX/
+*.swp
+.idea/
+.vscode/

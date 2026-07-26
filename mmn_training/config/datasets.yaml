@@ -1,0 +1,272 @@
+datasets:
+  STANDING_SINGLE:
+    description: "Standing MA dataset, single-label, using neutralized lower-body skeletons."
+
+    annotations:
+      train: standing_ma/annotations/train_list_videos.txt
+      val:   standing_ma/annotations/val_list_videos.txt
+      test:  standing_ma/annotations/test_list_videos.txt
+
+    npy_subdirs:
+      train: train
+      val: val
+      test: test
+
+    out_dir: STANDING_single
+
+    label_type: single
+    num_classes: 52
+
+    npy_patterns:
+      - "poses_ma_{stem}.npy"
+      - "poses_{file}.npy"
+      - "{file}.npy"
+      - "{stem}.npy"
+
+    write_missing_report: true
+
+  LABEL_CONVERT_STANDING_NO_LOWER:
+    description: "Remove lower-body labels from standing MA single-label dataset."
+    source_dir: STANDING_single
+    out_dir: STANDING_single_upper
+    original_num_classes: 52
+    merge_groups: []
+    omit_labels: [24,25,26,27,28,29,30,31,48,49,50,51]
+    write_mapping_txt: true
+
+  MMA_SINGLE:
+    description: "MMA dataset: cut full pose sequences into single-label segments based on CSV annotations."
+
+    label_type: single
+    num_classes: 47
+
+    npy_subdirs:
+      train: train
+      val: val
+      test: test
+
+    segment_csv:
+      train: MMA52_real/annotations/train.csv
+      val: MMA52_real/annotations/val.csv
+      test: MMA52_real/annotations/test.csv
+
+    out_dir: MMA_single
+
+    full_npy_pattern: "poses_mma_{video_id}.npy"
+    segment_npy_pattern: "poses_mma_{video_id}_{start}_{end}_c{label}.npy"
+
+    segment_save_dir: same_as_input
+
+    csv_columns:
+      video_id: video_id
+      start_frame: start_frame
+      end_frame: end_frame
+      label: class
+
+    write_missing_report: true
+
+  MA_MULTI:
+    description: "Aggregate MA-52 clips into session-level sequences and multi-hot labels."
+
+    label_type: multi
+    num_classes: 52
+
+    annotations:
+      train: MA52_real/annotations/train_list_videos.txt
+      val: MA52_real/annotations/val_list_videos.txt
+      test: MA52_real/annotations/test_list_videos.txt
+
+    npy_subdirs:
+      train: train
+      val: val
+      test: test
+
+    out_dir: MA_multi
+
+    session_grouping:
+      prefix_tokens: 2
+
+    npy_patterns:
+      - "poses_ma_{stem}.npy"
+      - "poses_ma_{file}.npy"
+      - "poses_{stem}.npy"
+      - "poses_{file}.npy"
+      - "{stem}.npy"
+      - "{file}.npy"
+
+    merged_save_dir: same_as_input
+    merged_npy_pattern: "{split}_session_{session}.npy"
+    write_missing_report: true
+    label_dtype: float32
+
+  MMA_MULTI:
+    description: "MMA dataset: build video-level multi-label targets (multi-hot) from CSV annotations."
+
+    label_type: multi
+    num_classes: 52
+
+    video_csv:
+      train: MMA52_real/annotations/train.csv
+      val: MMA52_real/annotations/val.csv
+      test: MMA52_real/annotations/test.csv
+
+    npy_subdirs:
+      train: train
+      val: val
+      test: test
+
+    out_dir: MMA_multi
+
+    npy_patterns:
+      - "poses_{video_id}.mp4.npy"
+      - "poses_{video_id}.npy"
+      - "{video_id}.npy"
+      - "poses_mma_{video_id}.npy"
+
+    csv_columns:
+      video_id: video_id
+      label: class
+
+    write_missing_report: true
+    label_dtype: float32
+
+  MERGED_SINGLE:
+    description: "Merged single-label dataset from MA52 and MMA."
+
+    sources:
+      - STANDING_single
+      - MMA_single
+
+    out_dir: MERGED_SINGLE
+    shuffle: true
+    seed: 42
+
+  MERGED_MULTI:
+    description: "Merged multi-label dataset from MA52 and MMA with optional oversampling."
+
+    sources:
+      MMA_multi:
+        repeat: 1
+      MA_multi:
+        repeat: 1
+
+    out_dir: MERGED_MULTI
+    num_classes: 52
+    shuffle: true
+    seed: 42
+
+  LABEL_CONVERT_52_TO_47_SINGLE:
+    description: "Convert 52->47 for SINGLE-label PKLs."
+    source_dir: MERGED_SINGLE
+    out_dir: Fixed_merged_single47
+    original_num_classes: 52
+    merge_groups:
+      - [14, 13, 21]
+      - [23, 15]
+    omit_labels: [12, 22]
+    write_mapping_txt: true
+
+  LABEL_CONVERT_52_TO_47_MULTI:
+    description: "Convert 52->47 for MULTI-label PKLs."
+    source_dir: MERGED_MULTI
+    out_dir: Fixed_merged_multi47
+    original_num_classes: 52
+    merge_groups:
+      - [14, 13, 21]
+      - [23, 15]
+    omit_labels: [12, 22]
+    write_mapping_txt: true
+
+  FINETUNE_MULTI:
+    description: "Interview fine-tuning dataset (multi-label). Build PKLs from semicolon CSV."
+
+    label_type: multi
+    num_classes: 47
+
+    csv_path: fine_tunning/labels_fixed33_f.csv
+    csv_sep: ";"
+    csv_columns:
+      file_name: file_name
+      labels: labels
+
+    npy_dir: fine_tunning/archive
+
+    out_dir: fine_tunning/multi
+    out_files:
+      data_list: finetune_data_list.pkl
+      label_list: finetune_label_list.pkl
+
+    strict_missing: false
+    print_missing_limit: 20
+    label_dtype: float32
+
+  FINETUNE_SINGLE:
+    description: "Interview finetune dataset (single-label PKL). Uses first token in 'labels' column."
+
+    label_type: single
+
+    csv:
+      path: fine_tunning/labels_fixed33_f.csv
+      sep: ";"
+      columns:
+        file_name: file_name
+        labels: labels
+
+    npy_dir: fine_tunning/archive
+
+    out_dir: fine_tunning/single
+
+    output_files:
+      data_list: finetune_data_list.pkl
+      label_list: finetune_label_list.pkl
+
+    single_label_rule:
+      mode: first_token
+      drop_if_missing: true
+      verbose_warnings: true
+
+  FINETUNE_MULTI_SPLIT:
+    description: "Split finetune multi-label PKLs into train/val."
+    source:
+      in_dir: fine_tunning/multi
+      data_list: finetune_data_list.pkl
+      label_list: finetune_label_list.pkl
+
+    split:
+      train_ratio: 0.8
+      seed: 1
+      shuffle: true
+
+    output:
+      out_dir: fine_tunning/multi
+      train_data_list: finetune_train_data_list.pkl
+      train_label_list: finetune_train_label_list.pkl
+      val_data_list: finetune_val_data_list.pkl
+      val_label_list: finetune_val_label_list.pkl
+
+  FINETUNE_SINGLE_SPLIT:
+    description: "Split finetune single-label PKLs into train/val."
+    source:
+      in_dir: fine_tunning/single
+      data_list: finetune_data_list.pkl
+      label_list: finetune_label_list.pkl
+
+    split:
+      train_ratio: 0.8
+      seed: 1
+      shuffle: true
+
+    output:
+      out_dir: fine_tunning/single
+      train_data_list: finetune_train_data_list.pkl
+      train_label_list: finetune_train_label_list.pkl
+      val_data_list: finetune_val_data_list.pkl
+      val_label_list: finetune_val_label_list.pkl
+
+  MMN_SINGLE_47:
+    label_type: single
+    num_classes: 47
+
+  MMN_MULTI_47:
+    label_type: multi
+    num_classes: 47

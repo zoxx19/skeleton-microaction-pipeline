@@ -1,0 +1,40 @@
+# ===== Project paths =====
+base_dir: /home/hpc/iwso/REDACTED_ACCOUNT/repos/Micro-Action/Micro-action skeleton/MMN
+model_path: /home/hpc/iwso/REDACTED_ACCOUNT/models/pose_landmarker_full.task
+
+# ===== Train Data paths for MMA =====
+# video_dir: /home/woody/iwso/REDACTED_COLLABORATOR/scratch/MMA-52/train
+# out_root: /home/woody/iwso/REDACTED_COLLABORATOR/scratch/MMA-52/npy_out
+
+# ===== Train Data paths for MA =====
+video_dir: /home/hpc/iwso/REDACTED_ACCOUNT/repos/Micro-Action/Micro-action skeleton/MMN/data/MA52_real/train
+out_root: /home/hpc/iwso/REDACTED_ACCOUNT/repos/Micro-Action/Micro-action skeleton/MMN/npy_out_ma
+
+# ===== Vali Data paths for MMA =====
+# video_dir: /home/woody/iwso/REDACTED_COLLABORATOR/scratch/MMA-52/val
+# out_root: /home/woody/iwso/REDACTED_COLLABORATOR/scratch/MMA-52/npy_out
+
+# ===== Vali Data paths for MA =====
+# video_dir: /home/hpc/iwso/REDACTED_COLLABORATOR/MMN_MMA33/data/MA52_real/val
+# out_root: /home/woody/iwso/REDACTED_COLLABORATOR/MMN_MMA33/npy_out
+
+log_dir: /home/hpc/iwso/REDACTED_ACCOUNT/repos/Micro-Action/Micro-action skeleton/MMN/logs
+
+# ===== Pose extraction defaults =====
+pose:
+  stride: 1
+  roi: [0, 0, 1, 1]        # normalized ROI (xmin, ymin, xmax, ymax)
+  brightness: 0.0
+  contrast: 1.0
+  save_dtype: float16
+
+# MA52 Root directory where extracted pose npy files are stored
+npy_root: /home/hpc/iwso/REDACTED_ACCOUNT/repos/Micro-Action/Micro-action skeleton/MMN/npy_out_ma_neutralized
+
+# MMA52 Root directory where extracted pose npy files are stored
+mma_npy_root: /home/hpc/iwso/REDACTED_ACCOUNT/repos/Micro-Action/Micro-action skeleton/MMN/npy_out_mma
+
+# Root directory for datasets / annotations / output pkls
+data_root: /home/hpc/iwso/REDACTED_ACCOUNT/repos/Micro-Action/Micro-action skeleton/MMN/data
+
+
